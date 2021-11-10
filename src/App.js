@@ -4,7 +4,7 @@ import Form from '../src/components/Form';
 
 function App() { 
   const [members, setMembers] = useState([]);
-  const [values, setValues] = useState({ name: '', email: '', role: '' });
+  const [values, setValues] = useState({ name: '', email: '', role: '', party: '' });
 
   /**
    * create state variables to hold team members
@@ -15,11 +15,12 @@ function App() {
 
   const onSubmit = () => {
     setMembers([values, ...members]);
-    setValues({name: '', email: '', role: ''});
+    setValues({name: '', email: '', role: '', party: ''});
   }
 
-  const onChange = (name, value) => {
-    setValues({ ...values, [name]: value});
+  const onChange = (name, value, checked, type) => {
+    const valueToUse = type === 'checkbox' ? checked : value
+    setValues({ ...values, [name]: valueToUse});
   }
 
 
@@ -34,7 +35,7 @@ function App() {
         {members.map((member, idx) => {
           return (
             <div key={idx}>
-                 {member.name}, {member.role}, {member.email}
+                 {member.name}, {member.role}, {member.email}, {member.party}
             </div>
           )
 
